@@ -1,9 +1,12 @@
 {
-  "name": "curl",
+  "name": "everytrail",
   "version": "0.1.0",
-  "main": "./src/curl.js",
+  "main": "./src/everytrail.js",
   "dependencies": {
     "q":"0.9",
-    "request":"2.31.0"
+    "pigeon":"git://github.com/davidturissini/pigeon.git",
+    "underscore":"1.5.2",
+    "xml2js":"x.x.x",
+    "backbone":"x.x.x"
   }
 }
