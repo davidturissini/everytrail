@@ -1,0 +1,9 @@
+{
+  "name": "curl",
+  "version": "0.1.0",
+  "main": "./src/curl.js",
+  "dependencies": {
+    "q":"0.9",
+    "request":"2.31.0"
+  }
+}
