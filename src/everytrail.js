@@ -73,7 +73,7 @@ var everytrail = {
 		var user = new User({user_id:'2185111'});
 		
 		return user.fetch().then(function () {
-			return user.trips().fetch();
+			return user.pictures().fetch();
 		})
 
 		.then(function () {

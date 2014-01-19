@@ -7,19 +7,19 @@ var Trips = Backbone.Collection.extend({
 
 	model:Trip,
 
-	initialize: function (options) {
-		this.user_id = options.user_id;
-	},
-
 	parse: function (response) {
-		var tripAttributes = response.etUserTripsResponse.trips[0].trip;
-		return _.map(tripAttributes, function (attributes) {
-			return {
-				etTripResponse:{
-					trip:[attributes]
+		if (response.etUserTripsResponse) { // We have an xml response from the server
+			var tripAttributes = response.etUserTripsResponse.trips[0].trip;
+			return _.map(tripAttributes, function (attributes) {
+				return {
+					etTripResponse:{
+						trip:[attributes]
+					}
 				}
-			}
-		});
+			});
+		}
+
+		return response; // We have a json object
 	}
 
 });

@@ -15,8 +15,12 @@ var Trip = Backbone.Model.extend({
 	},
 
 	parse: function (response) {
-		var tripAttributes = response.etTripResponse.trip[0];
-		return Trip.parseResponseNode(tripAttributes);
+		if (response.etTripResponse) { // We have an xml response from the server
+			var tripAttributes = response.etTripResponse.trip[0];
+			return Trip.parseResponseNode(tripAttributes);
+		}
+
+		return response; // We have a json object
 	}
 
 });

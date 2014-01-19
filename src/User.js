@@ -14,10 +14,7 @@ var User = Backbone.Model.extend({
 	},
 
 	initialize: function () {
-		var trips = new Trips({
-			user_id:this.id
-		});
-
+		var trips = new Trips();
 		trips.url = '/api/user/trips';
 		trips.fetch = curryFetch({user_id:this.id}, trips.fetch, trips);
 
@@ -31,16 +28,20 @@ var User = Backbone.Model.extend({
 	},
 
 	parse: function (response, options) {
-		var responseData = response.etUserResponse.user[0];
-		var userData = {};
-		
-		for(var prop in responseData) {
-			if(responseData.hasOwnProperty(prop) && prop !== '$') {
-				userData[prop] = responseData[prop][0];
+		if (response.erUserResponse) { // We have an xml response from the server
+			var responseData = response.etUserResponse.user[0];
+			var userData = {};
+			
+			for(var prop in responseData) {
+				if(responseData.hasOwnProperty(prop) && prop !== '$') {
+					userData[prop] = responseData[prop][0];
+				}
 			}
+
+			return userData;
 		}
 
-		return userData;
+		return response; // We have a json object
 	}
 	
 
