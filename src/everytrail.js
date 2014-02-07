@@ -5,7 +5,7 @@ var Q = require('q');
 var Backbone = require('backbone');
 var User = require('./User');
 var Trip = require('./Trip');
-var Trips = requore('./Trips');
+var Trips = require('./Trips');
 
 Backbone.ajax = function (params) {
 	return everytrail.get(params.url, params.data || {})
