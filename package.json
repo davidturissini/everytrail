@@ -6,7 +6,6 @@
     "q":"0.9",
     "pigeon":"git://github.com/davidturissini/pigeon.git",
     "underscore":"1.5.2",
-    "xml2js":"x.x.x",
-    "backbone":"x.x.x"
+    "xml2js":"x.x.x"
   }
 }

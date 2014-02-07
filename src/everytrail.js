@@ -2,21 +2,17 @@ var pigeon = require('pigeon');
 var _ = require('underscore');
 var xml2js = require('xml2js');
 var Q = require('q');
-var Backbone = require('backbone');
 var User = require('./User');
 var Trip = require('./Trip');
 var Trips = require('./Trips');
+var userTranslator = require('./translator/user');
+var tripTranslator = require('./translator/trip');
 
-Backbone.ajax = function (params) {
-	return everytrail.get(params.url, params.data || {})
-		.then(function (e) {
-			if (params.success && typeof params.success === 'function') {
-				params.success(e);
-			}
-		});
-}
 
-var Trip = require('./Trip.js');
+var translators = {
+	'/api/user':userTranslator,
+	'/api/trip':tripTranslator
+};
 
 
 var apiConfig = {
@@ -64,12 +60,14 @@ var everytrail = {
 	},
 
 	get: function (path, params) {
-		return pigeon.get(buildUrl.call(this, path), params).then(parseResponse);
-	},
+		
+		return pigeon.get(buildUrl.call(this, path), params).then(parseResponse)
+			.then(function (xml) {
+				var translator = translators[path];
 
-	User:User,
-	Trip:Trip,
-	Trips:Trips
+				return translator.toJSON(xml);
+			});
+	},
 
 };
 
