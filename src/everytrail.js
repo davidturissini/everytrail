@@ -7,11 +7,13 @@ var Trip = require('./Trip');
 var Trips = require('./Trips');
 var userTranslator = require('./translator/user');
 var tripTranslator = require('./translator/trip');
+var tripsTranslator = require('./translator/trips');
 
 
 var translators = {
 	'/api/user':userTranslator,
-	'/api/trip':tripTranslator
+	'/api/trip':tripTranslator,
+	'/api/user/trips':tripsTranslator
 };
 
 
@@ -23,9 +25,6 @@ var apiConfig = {
 var INVALID_KEY_ERROR = 'INVALID API KEY';
 var INVALID_SECRET_ERROR = 'INVALID API SECRET';
 var INVALID_REQUEST_ERROR = 'INVALID API REQUEST';
-
-//key b4698addce8098c96300da620996c899
-//secret 03ff2a1c38a05a65
 
 function buildUrl (path) {
 	if (typeof apiConfig.key !== 'string') {
