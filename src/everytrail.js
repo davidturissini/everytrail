@@ -3,6 +3,9 @@ var _ = require('underscore');
 var xml2js = require('xml2js');
 var Q = require('q');
 var Backbone = require('backbone');
+var User = require('./User');
+var Trip = require('./Trip');
+var Trips = requore('./Trips');
 
 Backbone.ajax = function (params) {
 	return everytrail.get(params.url, params.data || {})
@@ -64,24 +67,9 @@ var everytrail = {
 		return pigeon.get(buildUrl.call(this, path), params).then(parseResponse);
 	},
 
-	getUser: function () {
-		everytrail.configure({
-			key:'b4698addce8098c96300da620996c899', 
-			secret:'03ff2a1c38a05a65'
-		});
-		var User = require('./User');
-		var user = new User({user_id:'2185111'});
-		
-		return user.fetch().then(function () {
-			return user.pictures().fetch();
-		})
-
-		.then(function () {
-			console.log('ok');
-		})
-
-
-	}
+	User:User,
+	Trip:Trip,
+	Trips:Trips
 
 };
 
